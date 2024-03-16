@@ -1,0 +1,30 @@
+{
+	"name": "workspace",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"PY_VERSION": "3.11",
+			"GO_VERSION": "1.22.0",
+			"USER": "vscode"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.fontFamily": "'Fira Code'",
+				"editor.fontLigatures": true,
+				"editor.renderWhitespace": "all",
+				"[go]": {
+					"editor.formatOnSave": true
+				}
+			},
+			"extensions": [
+				"ms-python.python",
+				"golang.go"
+			]
+		}
+	},
+	"forwardPorts": [8000, 8080],
+	"postCreateCommand": "uname -a",
+	"remoteUser": "vscode"
+}
