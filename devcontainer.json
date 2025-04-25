@@ -1,0 +1,42 @@
+{
+    "name": "workspace",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "PYTHON_VERSION": "3.12",
+            "GO_VERSION": "1.24.0",
+            "USER": "vscode"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "editor.fontFamily": "'Fira Code'",
+                "editor.fontLigatures": true,
+                "editor.renderWhitespace": "all",
+                "[python]": {
+                    "python.linting.enabled": true,
+                    "python.linting.ruffEnabled": true,
+                    "python.formatting.provider": "ruff",
+                    "editor.formatOnSave": true
+                },
+                "[go]": {
+                    "editor.formatOnSave": true
+                }
+            },
+            "extensions": [
+				"ms-python.python",
+				"golang.go",
+                "ms-python.pylint",
+                "GitHub.copilot",
+                "charliermarsh.ruff"
+			]
+        }
+    },
+    "forwardPorts": [8000, 8080],
+    "remoteUser": "vscode",
+    "workspaceFolder": "/workspaces/Workspace/",
+    "mounts": [
+        "source=/run/host-services/ssh-auth.sock,target=/ssh-agent,type=bind"
+    ]
+}
