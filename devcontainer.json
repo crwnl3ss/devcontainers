@@ -4,7 +4,7 @@
         "dockerfile": "Dockerfile",
         "args": {
             "PYTHON_VERSION": "3.12",
-            "GO_VERSION": "1.24.0",
+            "GO_VERSION": "1.24.6",
             "USER": "vscode"
         }
     },
@@ -17,8 +17,11 @@
                 "[python]": {
                     "python.linting.enabled": true,
                     "python.linting.ruffEnabled": true,
-                    "python.formatting.provider": "ruff",
-                    "editor.formatOnSave": true
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.codeActionsOnSave": {
+                        "source.organizeImports": "explicit"
+                    }
                 },
                 "[go]": {
                     "editor.formatOnSave": true

@@ -12,7 +12,9 @@ ENV TZ "Europe/Moscow"
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 ENV PATH "${PATH}:/usr/local/go/bin"
-RUN ls 
+ENV GOARCH=arm64 
+ENV GOOS=linux
+
 RUN groupadd --gid 1001 $USER && \
   useradd -s /bin/bash --uid 1001 --gid $USER -m $USER
 
@@ -26,7 +28,9 @@ RUN apt-get update && apt-get install -y software-properties-common
 
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get install -y sudo git curl zip vim \
-  python${PYTHON_VERSION} pipenv \
+  python${PYTHON_VERSION} \
+  python${PYTHON_VERSION}-venv \
+  pipenv \
   pipx \
   sqlite3 \
   nginx \
