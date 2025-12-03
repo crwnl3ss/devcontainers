@@ -4,10 +4,9 @@ ARG PYTHON_VERSION
 ARG GO_VERSION
 ARG USER vscode
 
-LABEL version 0.3.0
+LABEL version 0.3.1
 LABEL maintainer crownless@me.com
 
-ENV debian_frontend noninteractive
 ENV TZ "Europe/Moscow"
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
@@ -29,8 +28,6 @@ RUN apt-get update && apt-get install -y software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get install -y sudo git curl zip vim \
   python${PYTHON_VERSION} \
-  python${PYTHON_VERSION}-venv \
-  pipenv \
   pipx \
   sqlite3 \
   nginx \
@@ -38,9 +35,10 @@ RUN apt-get install -y sudo git curl zip vim \
 
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 # install python and various useful linters
-RUN pipx install ruff && pipx install mypy
+RUN pipx install ruff && pipx install mypy && pipx install uv
+
 # install golang
 WORKDIR /tmp
-RUN curl -O https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz
+RUN curl -O https://dl.google.com/go/go$GO_VERSION.linux-$GOARCH.tar.gz
 RUN rm -rf /usr/local/go
-RUN tar -C /usr/local -xzf go$GO_VERSION.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go$GO_VERSION.linux-$GOARCH.tar.gz
