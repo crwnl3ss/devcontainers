@@ -34,7 +34,7 @@ RUN apt-get install -y sudo git curl zip vim \
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 # install python and tools
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
-  pipx install ruff && pipx install mypy && pipx install uv
+  pipx install ruff && pipx install mypy
 
 # install golang & golangci-lint
 WORKDIR /tmp
