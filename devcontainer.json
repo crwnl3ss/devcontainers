@@ -15,12 +15,11 @@
                 "editor.fontLigatures": true,
                 "editor.renderWhitespace": "all",
                 "[python]": {
-                    "python.linting.enabled": true,
                     "python.linting.ruffEnabled": true,
                     "editor.formatOnSave": true,
                     "editor.defaultFormatter": "charliermarsh.ruff",
                     "editor.codeActionsOnSave": {
-                        "source.organizeImports": "explicit"
+                        "source.organizeImports.ruff": "explicit"
                     }
                 },
                 "[go]": {
@@ -28,18 +27,20 @@
                 }
             },
             "extensions": [
-				"ms-python.python",
-				"golang.go",
-                "ms-python.pylint",
+                "ms-python.python",
+                "golang.go",
                 "GitHub.copilot",
                 "charliermarsh.ruff"
-			]
+            ]
         }
     },
     "forwardPorts": [8000, 8080, 1455],
     "remoteUser": "vscode",
-    "workspaceFolder": "/workspaces/Workspace/",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/",
     "mounts": [
         "source=/run/host-services/ssh-auth.sock,target=/ssh-agent,type=bind"
-    ]
+    ],
+    "remoteEnv": {
+        "SSH_AUTH_SOCK": "/ssh-agent"
+    }
 }
