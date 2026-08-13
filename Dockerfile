@@ -29,11 +29,12 @@ RUN apt-get install -y sudo git curl zip vim \
   pipx \
   sqlite3 \
   nginx \
-  ansible
+  ansible \
+  make
 
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 # install python and tools
-RUN curl -LsSf https://astral.sh/uv/install.sh | sh && \
+RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR="/usr/bin/" sh && \
   pipx install ruff && pipx install mypy
 
 # install golang & golangci-lint

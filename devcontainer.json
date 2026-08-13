@@ -4,7 +4,7 @@
         "dockerfile": "Dockerfile",
         "args": {
             "PYTHON_VERSION": "3.14",
-            "GO_VERSION": "1.25.4",
+            "GO_VERSION": "1.26.5",
             "USER": "vscode"
         }
     },
@@ -29,7 +29,6 @@
             "extensions": [
                 "ms-python.python",
                 "golang.go",
-                "GitHub.copilot",
                 "charliermarsh.ruff"
             ]
         }
