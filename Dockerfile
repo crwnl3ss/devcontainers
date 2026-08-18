@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 FROM ubuntu:24.04
 
 ARG PYTHON_VERSION
@@ -10,7 +12,7 @@ LABEL maintainer=crownless@me.com
 ENV TZ "Europe/Moscow"
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV PATH "${PATH}:/usr/local/go/bin:/home/vscode/go/bin:/home/vscode/.local/bin"
+ENV PATH "/usr/local/go/bin:${PATH}"
 
 RUN groupadd --gid 1001 $USER && \
   useradd -s /bin/bash --uid 1001 --gid $USER -m $USER
@@ -33,11 +35,12 @@ RUN apt-get install -y sudo git curl zip vim \
   make
 
 RUN apt clean && rm -rf /var/lib/apt/lists/*
-# install python and tools
-RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR="/usr/bin/" sh && \
-  pipx install ruff && pipx install mypy
 
-# install golang & golangci-lint
+# install Python tools
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+RUN uv tool install ruff && uv tool install mypy
+
+# install Golang & and related tools
 WORKDIR /tmp
 RUN curl -O https://dl.google.com/go/go${GO_VERSION}.linux-arm64.tar.gz && \
   rm -rf /usr/local/go && \
